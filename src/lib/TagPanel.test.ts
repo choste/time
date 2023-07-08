@@ -4,8 +4,20 @@ import '@testing-library/jest-dom';
 
 import TagPanel from './TagPanel.svelte';
 
-test('shows proper heading when rendered', () => {
+test('shows the tags label', () => {
 	render(TagPanel);
-	const text = screen.getByText('Tags');
-	expect(text).toBeInTheDocument();
+	const label = screen.getByText('Tags');
+
+	expect(label).toBeInTheDocument();
+});
+
+test.each([
+	[[], ''],
+	[[{ name: 'bird' }], 'bird'],
+	[[{ name: 'cat' }, { name: 'bird' }], 'cat,bird']
+])('given %o as tags, the panal should contain "%s"', (tags, expected) => {
+	render(TagPanel, { tags });
+	const panel = screen.getByTestId('tag-panel');
+
+	expect(panel).toHaveTextContent(expected);
 });
