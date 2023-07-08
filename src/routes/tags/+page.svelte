@@ -1,5 +1,5 @@
 <script>
-    import TagPanel from '$lib/TagPanel.svelte'
+	import TagPanel from '$lib/TagPanel.svelte';
 </script>
 
-<TagPanel/>
+<TagPanel />
