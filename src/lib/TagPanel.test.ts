@@ -14,7 +14,7 @@ test('shows the tags label', () => {
 test.each([
 	[[], ''],
 	[[{ name: 'bird' }], 'bird'],
-	[[{ name: 'cat' }, { name: 'bird' }], 'cat,bird']
+	[[{ name: 'cat' }, { name: 'bird' }], 'cat bird']
 ])('given %o as tags, the panal should contain "%s"', (tags, expected) => {
 	render(TagPanel, { tags });
 	const panel = screen.getByTestId('tag-panel');
