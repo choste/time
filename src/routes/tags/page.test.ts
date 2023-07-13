@@ -1,18 +1,36 @@
 import { test, expect } from 'vitest';
 import Page from './+page.svelte';
-import { render, screen, fireEvent, waitFor } from '@testing-library/svelte';
+import { render, screen, fireEvent } from '@testing-library/svelte';
 import '@testing-library/jest-dom';
 
 test('Adding a tag', async () => {
+	const value = 'cat';
+
 	render(Page);
 
 	const input = screen.getByPlaceholderText('enter a tag');
-	await fireEvent.change(input, { target: { value: 'cat' } });
+	await fireEvent.input(input, { target: { value } });
 
 	const button = screen.getByRole('button');
 	await fireEvent.click(button);
 
-	const panel = screen.getByTestId('tag-panel');
+	expect(screen.getByText(value)).toBeInTheDocument();
+});
 
-	waitFor(() => expect(panel).toHaveTextContent('cat'));
+test('Removing tags works', async () => {
+	const value = 'cat';
+
+	render(Page);
+
+	const input = screen.getByPlaceholderText('enter a tag');
+	await fireEvent.input(input, { target: { value } });
+
+	const button = screen.getByRole('button');
+	await fireEvent.click(button);
+	const tagChip = screen.getByText(value);
+
+	const tagDelete = screen.getByTestId('delete-' + value);
+	await fireEvent.click(tagDelete);
+
+	expect(tagChip).not.toBeInTheDocument();
 });
