@@ -2,4 +2,6 @@
 	import '../app.css';
 </script>
 
-<slot />
+<main class="h-screen bg-slate-50">
+	<slot />
+</main>

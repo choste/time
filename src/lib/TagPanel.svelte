@@ -1,18 +1,15 @@
 <script>
 	import { createEventDispatcher } from 'svelte';
 
-	export let tags = [];
+	export let tags = [{ name: 'test' }];
 
 	const dispatch = createEventDispatcher();
 </script>
 
-<p class="font-bold my-2 ml-1">Tags</p>
-<div data-testid="tag-panel">
+<p class="my-2 ml-1 font-bold">Tags</p>
+<div data-testid="tag-panel" class="h-96 bg-white p-2 drop-shadow-xl">
 	{#each tags as tag}
-		<div class="bg-green-400 rounded-full px-2 m-2 w-fit">
-			<span>
-				{tag.name}
-			</span>
+		<div class="m-0.5 inline-block w-fit rounded-full bg-indigo-700 px-2 text-white drop-shadow">
 			<button
 				on:click={() => {
 					dispatch('tagDelete', { tagName: tag.name });
@@ -25,11 +22,14 @@
 					viewBox="0 0 24 24"
 					stroke-width="1.5"
 					stroke="currentColor"
-					class="w-4 h-4 inline-block mb-0.5"
+					class="-ml-1 mb-0.5 inline-block h-4 w-4"
 				>
 					<path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
 				</svg>
 			</button>
+			<span class="pr-2">
+				{tag.name}
+			</span>
 		</div>
 	{/each}
 </div>
