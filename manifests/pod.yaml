@@ -11,16 +11,3 @@ spec:
       image: ghcr.io/choste/time:main
       ports:
         - containerPort: 3000
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: time-service
-  namespace: garden
-spec:
-  selector:
-    app: time
-  ports:
-    - protocol: TCP
-      port: 3000
-      targetPort: 3000
