@@ -1,7 +1,14 @@
-import { test, expect } from 'vitest';
+import { test, expect, afterEach } from 'vitest';
 import Page from './+page.svelte';
-import { render, screen, fireEvent } from '@testing-library/svelte';
+import { render, screen, fireEvent, cleanup } from '@testing-library/svelte';
 import '@testing-library/jest-dom';
+import { tagStore, initialTags } from '$lib/store';
+
+afterEach(() => {
+	//Reset store state after each test, otherwise the tests build on each other.
+	tagStore.set(initialTags);
+	cleanup();
+});
 
 test('Adding a tag', async () => {
 	const value = 'cat';

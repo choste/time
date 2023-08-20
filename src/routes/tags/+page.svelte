@@ -1,17 +1,28 @@
 <script>
 	import TagPanel from '$lib/TagPanel.svelte';
+	import { tagStore } from '$lib/store';
 
 	let tagName = '';
+	/**
+	 * @type {{name: String}[]}
+	 */
 	let tags = [];
 
+	tagStore.subscribe((value) => {
+		tags = value;
+	});
+
 	function handleAddTag() {
-		tags = [...tags, { name: tagName }];
+		tagStore.update((tags) => [...tags, { name: tagName }]);
 		tagName = '';
 	}
 
+	/**
+	 * @param {{ detail: { tagName: string; }; }} event
+	 */
 	function handleDelete(event) {
 		const tagToDelete = event.detail.tagName;
-		tags = tags.filter(({ name }) => name != tagToDelete);
+		tagStore.update((tags) => tags.filter(({ name }) => name != tagToDelete));
 	}
 </script>
 

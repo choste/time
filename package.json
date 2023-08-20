@@ -42,5 +42,8 @@
 		"vite": "^4.4.2",
 		"vitest": "^0.32.4"
 	},
-	"type": "module"
+	"type": "module",
+	"dependencies": {
+		"jotai": "^2.2.3"
+	}
 }
