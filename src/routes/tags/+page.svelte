@@ -1,6 +1,15 @@
-<script>
+<script lang="ts">
 	import TagPanel from '$lib/TagPanel.svelte';
 	import { tagStore } from '$lib/store';
+	import { onMount } from 'svelte';
+
+	import type { PageData } from './$types';
+
+	export let data: PageData;
+
+	onMount(() => {
+		tagStore.set(data.feed.map(({ name }) => ({ name })));
+	});
 
 	let tagName = '';
 	/**

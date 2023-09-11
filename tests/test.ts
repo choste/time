@@ -8,5 +8,5 @@ test('tags page exist', async ({ page }) => {
 test('tag page has an input and button', async ({ page }) => {
 	await page.goto('/tags');
 	await expect(page.getByPlaceholder('enter a tag')).toBeVisible();
-	await expect(page.getByRole('button')).toBeVisible();
+	await expect(page.getByRole('button', { name: 'Add Tag' })).toBeVisible();
 });
