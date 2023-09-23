@@ -8,6 +8,6 @@ metadata:
 spec:
   containers:
     - name: time
-      image: ghcr.io/choste/time@sha256:df4a23205bb071a07699c9c44bd3fb0b9a87cba97e9397932ba4a8261222fd22
+      image: ghcr.io/choste/time@sha256:df822e879b6436102bb99a888d63da541e222492143a1c3317cf6b003c494134
       ports:
         - containerPort: 3000
