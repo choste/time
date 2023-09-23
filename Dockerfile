@@ -1,5 +1,12 @@
 FROM node:lts-alpine
 
+ENV DATABASE_URL=file:/tmp/garden.db
+
+COPY . .
+RUN npm ci && npm run prisma migrate deploy
+
+FROM node:lts-alpine
+
 # Create app directory
 WORKDIR /usr/src/app
 
@@ -14,6 +21,9 @@ RUN npm ci --omit=dev
 
 # Bundle app source
 COPY . .
+
+ENV DATABASE_URL=file:/usr/src/app/garden.db
+COPY --from=0 /tmp/garden.db /usr/src/app/garden.db
 
 EXPOSE 8080
 CMD [ "node", "build/index.js" ]
