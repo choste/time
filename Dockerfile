@@ -24,6 +24,7 @@ COPY . .
 
 ENV DATABASE_URL=file:/usr/src/app/garden.db
 COPY --from=0 /tmp/garden.db /usr/src/app/garden.db
+RUN npm run prisma generate
 
 EXPOSE 8080
 CMD [ "node", "build/index.js" ]
